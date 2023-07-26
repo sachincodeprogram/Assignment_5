@@ -4,9 +4,8 @@ import {MdLocationOn} from 'react-icons/md'
 import {AiFillStar} from 'react-icons/ai'
 import {BiLinkExternal} from 'react-icons/bi'
 import Loader from 'react-loader-spinner'
+import SimilarJobs from '../SimilarJobs'
 import Header from '../Header'
-import SimilarJobs from '/SimilarJobs'
-import './index.css'
 
 const apiStatusConstants = {
   initial: 'INITIAL',
@@ -169,7 +168,7 @@ class AboutJobItem extends Component {
           </div>
           <h1 className="similar-jobs-heading">Similar Jobs</h1>
           <ul className="similar-jobs-ul-container">
-            {similarJobData.map(eachItem => (
+            {similarJobsData.map(eachItem => (
               <SimilarJobs
                 key={eachItem.id}
                 similarJobDate={eachItem}
