@@ -4,7 +4,6 @@ import Cookies from 'js-cookie'
 import {AiOutlineSearch} from 'react-icons/ai'
 import Header from '../Header'
 import JobItem from '../JobItem'
-import './index.css'
 
 const employmentTypesList = [
   {
@@ -51,7 +50,7 @@ const apiStatusConstants = {
   inProgress: 'IN_PROGRESS',
 }
 
-const apiJobStatusConstants = {
+const apiJobsStatusConstants = {
   initial: 'INITIAL',
   success: 'SUCCESS',
   failure: 'FAILURE',
@@ -108,11 +107,11 @@ class AllJobs extends Component {
 
   onGetJobDetails = async () => {
     this.setState({
-      apiJobsStatus: apiJobStatusConstants.inProgress,
+      apiJobsStatus: apiJobsStatusConstants.inProgress,
     })
     const jwtToken = Cookies.get('jwt_token')
     const {checkboxInputs, radioInput, searchInput} = this.state
-    const jobApiUrl = `https://apis.ccbp.in/jobs?employment_type=${checkboxInputs}&minimun_package=${radioInput}&search=$`
+    const jobsApiUrl = `https://apis.ccbp.in/jobs?employment_type=${checkboxInputs}&minimun_package=${radioInput}&search=$`
     const optionsJobs = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
@@ -122,7 +121,7 @@ class AllJobs extends Component {
     const responseJobs = await fetch(jobsApiUrl, optionsJobs)
     if (responseJobs.ok === true) {
       const fetchedDataJobs = await responseJobs.json()
-      const updateDataJobs = fetchedDataJobs.jobs.map(eachItem => ({
+      const updatedDataJobs = fetchedDataJobs.jobs.map(eachItem => ({
         companyLogoUrl: eachItem.company_logo_url,
         employmentType: eachItem.employment_type,
         id: eachItem.id,
@@ -248,7 +247,7 @@ class AllJobs extends Component {
       <div className="no-jobs-container">
         <img
           className="no-jobs-img"
-          scr="https://assets.ccbp.in/frontend/react-js/no-jobs-img.png"
+          src="https://assets.ccbp.in/frontend/react-js/no-jobs-img.png"
           alt="no jobs"
         />
         <h1>No jobs found</h1>
@@ -285,7 +284,7 @@ class AllJobs extends Component {
             className="input"
             id={eachItem.employmentTypeId}
             type="checkbox"
-            OnChange={this.onGetInputOption}
+            onChange={this.onGetInputOption}
           />
           <label className="label" htmlFor={eachItem.employmentTypeId}>
             {eachItem.label}
@@ -351,7 +350,7 @@ class AllJobs extends Component {
                 value={searchInput}
                 placeholder="Search"
                 onChange={this.onGetSearchInput}
-                onkeyDown={this.onEnterSearchInput}
+                onKeyDown={this.onEnterSearchInput}
               />
               <button
                 data-testid="searchButton"
