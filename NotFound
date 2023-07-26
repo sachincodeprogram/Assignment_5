@@ -1,5 +1,4 @@
-import Header from '../header'
-import './index.css'
+import Header from '../Header'
 
 const notFoundImage =
   'https://assets.ccbp.in/frontend/react-js/jobby-app-not-found-img.png '
