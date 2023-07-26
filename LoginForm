@@ -1,7 +1,6 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import {Redirect} from 'react-router-dom'
-import './index.css'
 
 const websiteLogoInForm =
   'https://assets.ccbp.in/frontend/react-js/logo-img.png'
@@ -21,12 +20,13 @@ class LoginForm extends Component {
   }
 
   onSubmitFailure = erroMsg => {
-    this.setState({showSubmitError: true, errorMsg})
+    this.setState({showSubmitError: true, erroMsg})
   }
 
   onSubmitLoginForm = async event => {
     event.preventDefault()
     const {username, password} = this.state
+    const userDetails = {username, password}
     const loginApiUrl = 'https://apis.ccbp.in/login'
     const options = {
       method: 'POST',
